@@ -1,4 +1,7 @@
 #include "adil_quantum.h"
+
+namespace quantumDoesNothing
+
 int main () {
   char originalBits [ 152 ]; // array to hold the files orignal sequence
   std::ifstream binSeqfile("/Users/adilzaben/Downloads/binSeq.txt"); // read file
