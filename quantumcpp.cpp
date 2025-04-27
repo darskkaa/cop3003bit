@@ -1,16 +1,10 @@
-#include <fstream>
-#include <bitset>
-#include <iostream>
-#include <string>
-#include "math.h"
-
-
+#include "adil_quantum.h"
 int main () {
   char originalBits [ 152 ]; // array to hold the files orignal sequence
   std::ifstream binSeqfile("/Users/adilzaben/Downloads/binSeq.txt"); // read file
   for(int i = 0; i < 152; i++)  //loop through the file 152 times
       binSeqfile >> originalBits[i];    //write a 1 or 0 from the file to the array
-  }  binSeqfile.close();   //close the file
+} binSeqfile.close();   //close the file
                             
 //flip the pairs
 char flipBitAlpha[128];        //first alpha for the pair
@@ -19,8 +13,8 @@ char flipBitAlpha[128];        //first alpha for the pair
     for(int i = 0; i < 128; i++)  {  //loop thriugh the lines of the file
       flipFile >> flipBitAlpha [i];      //read alpha first, then beta
         flipFile >> flipBitBeta [i];    //assign beta from the file
-    }
-  flipFile.close (); 
+    
+    } flipFile.close (); 
 
 
 std::srand();
@@ -35,12 +29,13 @@ std::srand();
 std::cout<<"First Encryption Mod 128" << std::endl;
     std::bitset<8> byte( std::string(firstEncryption)); // load 8 chars from all the chars contained in firstEncryption
   byte.flip();    //flip the bits
-   byte.to_ulong();  //convert the flipped bits to a decimal
+   std::cout byte.to_ulong();  //convert the flipped bits to a decimal
+if(byte > 8) {
+  std::cout<<".";    //print dot  between
+
   std::cout<<"\n";    //print new lines between
   
 }
-
-
 
 
 std::srand();
@@ -64,9 +59,16 @@ std::cout<<"Second Encryption Mod 128" << std::endl;
   byte.flip();
    byte.to_ulong();
   std::cout<<"\n";
-return 0; 
-  
+if(byte > 8) {
+  std::cout<<".";    //print dot  between
+  std::cout<<"\n";    //print new lines between
 }
+}
+
+return 0; 
+}
+  
+
 
 
 
