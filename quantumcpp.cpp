@@ -19,7 +19,7 @@ char flipBitAlpha[128];        //first alpha for the pair
     for(int i = 0; i < 128; i++)    //loop thriugh the lines of the file
       flipFile >> flipBitAlpha [i];      //read alpha first, then beta
         flipFile >> flipBitBeta [i];
-  flipBitBeta.close 
+  flipFile.close 
 
 
 std::srand();
@@ -32,16 +32,9 @@ std::srand();
 
 
 std::cout<<"First Encryption Mod 128"<<std;endl;
-for int start = 0; start < 304; start += 8){ //gorhough the the bits, at 8 bit intervals
     std::bitset<8> byte( std::string(firstEncryption)); // load 8 chars
-  std::cout << byte.flip() << '\n'; 
-  std::cout << byte << " as an integer is: " << byte.to_ulong() << '\n';
-
-
-
-
-
-
+  byte.flip();
+   byte.to_ulong();
 
 
 
@@ -57,8 +50,8 @@ std::srand();
 
 std::cout<<"Second Encryption Mod 64"<<std;endl;
     std::bitset<8> byte( std::string(secondEncryption)); // load 8 chars
-  std::cout << byte.flip() << '\n'; 
-  std::cout << byte << " as an integer is: " << byte.to_ulong() << '\n';
+ byte.flip();
+ byte.to_ulong();
 
 
 
