@@ -1,77 +1,68 @@
 #include "adil_quantum.h"
 
-namespace quantumDoesNothing
-
 int main () {
-  char originalBits [ 152 ]; // array to hold the files orignal sequence
-  std::ifstream binSeqfile("/Users/adilzaben/Downloads/binSeq.txt"); // read file
-  for(int i = 0; i < 152; i++)  //loop through the file 152 times
-      binSeqfile >> originalBits[i];    //write a 1 or 0 from the file to the array
-} binSeqfile.close();   //close the file
-                            
-//flip the pairs
-char flipBitAlpha[128];        //first alpha for the pair
-  char flipBitBeta[128];      //second bit , beta in the pair
-    std::ifstream flipFile ("/Users/adilzaben/Downloads/flip-1.txt"); // read file
-    for(int i = 0; i < 128; i++)  {  //loop thriugh the lines of the file
-      flipFile >> flipBitAlpha [i];      //read alpha first, then beta
-        flipFile >> flipBitBeta [i];    //assign beta from the file
+    char originalBits [152]; // array to hold the files orignal sequence, uses the header for size
+    std::ifstream binSeqfile("/Users/adilzaben/Downloads/binSeq.txt"); // read file
+    for(int i = 0; i < 152; i++){  //loop through the file 152 times
+        binSeqfile >> originalBits[i];    //write a 1 or 0 from the file to the array
+    }  binSeqfile.close();   //close the file
     
-    } flipFile.close (); 
+    //flip the pairs
+    char flipBitAlpha[128]//first alpha for the pair
+    char comma;
+    char flipBitBeta[128];      //second bit , beta in the pair
+    std::ifstream flipFile ("/Users/adilzaben/Downloads/binSeq.txt"); // read file
+    for(int i = 0; i < 128; i++)  {  //loop thriugh the lines of the file
+        flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i];
+    
+    flipFile.close ();
+    
+    char firstEncryption [304]; // when each bit is * 2, so 304;
+    
+    for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
+        int randomIndex = std::rand() % 128;//out of 128 pairs choose  a random one
+        if(originalBits[bit]] == '0' {      //if the original bit sequence is a 0, keep
+           firstEncryption[ 2 * bit] = flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
+           firstEncryption[ 2 * bit] = flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
 
 
-std::srand();
-  char firstEncryption [304]; // when each bit is * 2, so 304;
-
-  for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
-    int randomIndex = rand() % 128;   //out of 128 pairs choose  a random one
-    firstEncryption [ 2 * bit] = flipBitAlpha [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
-    firstEncryption [ 2 * bit] = flipBitBeta [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
+            }
+    else {
+            }
+           firstEncryption[ 2 * bit] = flipBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
+           firstEncryption[ 2 * bit] = flipAlpha[randomIndex]; //alpha goes seco
 }
 
-std::cout<<"First Encryption Mod 128" << std::endl;
-    std::bitset<8> byte( std::string(firstEncryption)); // load 8 chars from all the chars contained in firstEncryption
-  byte.flip();    //flip the bits
-   std::cout byte.to_ulong();  //convert the flipped bits to a decimal
-if(byte > 8) {
-  std::cout<<".";    //print dot  between
+    
+    std::cout << "First Encryption Mod 128" << std::endl;
+        std::bitset<8> byte(std::string(firstEncryption);
+        std::cout << byte.to_ulong();
+            std::cout << ".";
+        }
 
-  std::cout<<"\n";    //print new lines between
   
+    char secondEncryption [304]; // when each bit is * 2, so 304;
+    
+    for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
+        int randomIndex = std::rand() % 64;//out of 64 pairs choose  a random one
+        if(originalBits[bit]] == '0' {      //if the original bit sequence is a 0, keep
+           secondEncryption[ 2 * bit] = flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
+           secondEncryption[ 2 * bit] = flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
+
+
+            }
+    else {
+            }
+           secondEncryption[ 2 * bit] = flipBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
+           secondEncryption[ 2 * bit] = flipAlpha[randomIndex]; //alpha goes seco
 }
 
-
-std::srand();
-  char secondEncryption [304]; // when each bit is * 2, so 304;
-
-  for (int bit = 0; bit < 152; bit++) //use the int bit to hold the bit posiio in the original sequence
-    int randomIndex = rand() % 64   //out of 128 pairs choose  a random one
-    secondEncryption [ 2 * bit] = flipBitAlpha [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
-    secondEncryption [ 2 * bit] = flipBitBeta [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
-
-std::srand();
-  char secondEncryption [304]; // when each bit is * 2, so 304;
-  for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
-    int randomIndex = rand() % 128;   //out of 128 pairs choose  a random one
-    secondEncryption [ 2 * bit] = flipBitAlpha [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
-    secondEncryption [ 2 * bit] = flipBitBeta [randomIndex]; //use the alpha from the random pair, and puts into the encryoted array
-}
-
-std::cout<<"Second Encryption Mod 128" << std::endl;
-    std::bitset<8> byte( std::string(secondEncryption)); // load 8 chars
-  byte.flip();
-   byte.to_ulong();
-  std::cout<<"\n";
-if(byte > 8) {
-  std::cout<<".";    //print dot  between
-  std::cout<<"\n";    //print new lines between
-}
-}
-
-return 0; 
-}
-  
-
+    
+    std::cout << "Second Encryption Mod 64" << std::endl;
+        std::bitset<8> byte(std::string(secondEncryption, 8);
+        std::cout << byte.to_ulong();
+            std::cout << ".";
+        }
 
 
 
