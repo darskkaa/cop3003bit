@@ -48,7 +48,7 @@ int main () {
     
     std::cout << "First Encryption Mod 128" << std::endl;
     for (int i= 0; i < 304; i+= 8){ //loop through the 304 long string, into 8 bit sections
-        std::string eight_byte_to_strings = firstEncryption.substr(i, 8); // at index i, start getting 8 char substrings. 8 bits as a string
+        std::string eight_byte_to_strings = firstEncryption.substr(i, 8); // at index i, start getting 8 byte substrings. 
         
         std::bitset<8> byte(eight_byte_to_strings);  // use that 8 bit string to binary
         std::cout << byte.to_ulong();  //print the actaul decimal value of the binary using the u-long bitset operand
@@ -88,11 +88,11 @@ int main () {
     
     std::cout << "Second Encryption Mod 64" << std::endl;
     for (int i= 0; i < 304; i+= 8){ //loop through the 304 long string, into 8 bit sections
-        std::string eight_byte_to_strings = secondEncryption.substr(i, 8); // at index i, start getting 8 char substrings. 8 bits as a string
-        
+        std::string eight_byte_to_strings = secondEncryption.substr(i, 8); // at index i, start getting 8 char substrings. each as 8 bit blocks
         std::bitset<8> byte(eight_byte_to_strings);  // use that 8 bit string to binary
         std::cout << byte.to_ulong();  //print the actaul decimal value of the binary using the u-long bitset operand
-        std::cout << "."; //seperate by dot
+            std::cout << "."; //seperate by dot
+        
     }
     std::cout << std::endl;
     
