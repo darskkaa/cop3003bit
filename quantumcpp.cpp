@@ -1,7 +1,7 @@
 #include "adil_quantum.h"
 
 int main () {
-    char originalBits [152]; // array to hold the files orignal sequence, uses the header for size
+    char originalBits [152]; // array to hold the files orignal sequence
     std::ifstream binSeqfile("/Users/adilzaben/Downloads/binSeq.txt"); // read file
     for(int i = 0; i < 152; i++){  //loop through the file 152 times
         binSeqfile >> originalBits[i];    //write a 1 or 0 from the file to the array
@@ -12,17 +12,18 @@ int main () {
     char comma;  //ensure the file is read properly
     char flipBitBeta[128];      //second bit , beta in the pair
     std::ifstream flipFile ("/Users/adilzaben/Downloads/flip-1.txt"); // read file
-    for(int i = 0; i < 128; i++)  {  //loop thriugh the lines of the file
-        flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i]; //
+    for(int i = 0; i < 128; i++)  {  //loop thriugh the flip pairs
+        flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i]; //read alpha, comma, then beta
             }
     flipFile.close ();
 
-    std::string firstEncryption = "";
+    std::string firstEncryption = "";  //an empty string for the concantation
     
     
     for (int bit = 0; bit < 152; bit++) { //use the int bit to hold the bit posiio in the original sequence
         int randomIndex = std::rand() % 128;//out of 128 pairs choose  a random one
-        if(originalBits[bit] == '0')  {   //if the original bit sequence is a 0, keep
+        if(originalBits[bit] == '0')  {   //if the original bit sequence is a 0, keep the curent alpha beta 
+            //appends the alpha bit from the random pair slected pir 1-28 from modulo to the encyrpted string
             firstEncryption += flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
             firstEncryption += flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
             
