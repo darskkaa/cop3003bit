@@ -8,61 +8,72 @@ int main () {
     }  binSeqfile.close();   //close the file
     
     //flip the pairs
-    char flipBitAlpha[128]//first alpha for the pair
-    char comma;
+    char flipBitAlpha[128]; //first alpha for the pair
+    char comma;  //ensure the file is read properly
     char flipBitBeta[128];      //second bit , beta in the pair
-    std::ifstream flipFile ("/Users/adilzaben/Downloads/binSeq.txt"); // read file
+    std::ifstream flipFile ("/Users/adilzaben/Downloads/flip-1.txt"); // read file
     for(int i = 0; i < 128; i++)  {  //loop thriugh the lines of the file
-        flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i];
-    
+        flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i]; //
+            }
     flipFile.close ();
+
+    std::string firstEncryption = "";
     
-    char firstEncryption [304]; // when each bit is * 2, so 304;
     
-    for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
+    for (int bit = 0; bit < 152; bit++) { //use the int bit to hold the bit posiio in the original sequence
         int randomIndex = std::rand() % 128;//out of 128 pairs choose  a random one
-        if(originalBits[bit]] == '0' {      //if the original bit sequence is a 0, keep
-           firstEncryption[ 2 * bit] = flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
-           firstEncryption[ 2 * bit] = flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
-
-
-            }
-    else {
-            }
-           firstEncryption[ 2 * bit] = flipBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
-           firstEncryption[ 2 * bit] = flipAlpha[randomIndex]; //alpha goes seco
-}
-
-    
-    std::cout << "First Encryption Mod 128" << std::endl;
-        std::bitset<8> byte(std::string(firstEncryption);
-        std::cout << byte.to_ulong();
+        if(originalBits[bit] == '0')  {   //if the original bit sequence is a 0, keep
+            firstEncryption += flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
+            firstEncryption += flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
+            
+            
+            
+        }
+        else {
+            
+            firstEncryption += flipBitBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
+            firstEncryption += flipBitAlpha[randomIndex]; // alpha goes second
+        }
+    }
+        
+        
+        std::cout << "First Encryption Mod 128" << std::endl;
+        for (int i= 0; i < 304; i+= 8){
+            std::string eight_byte_to_strings = firstEncryption.substr(i, 8);
+            std::bitset<8> byte(eight_byte_to_strings);
+            std::cout << byte.to_ulong();
             std::cout << ".";
         }
+        
+        
+    std::cout << std::endl;
 
-  
-    char secondEncryption [304]; // when each bit is * 2, so 304;
-    
-    for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
-        int randomIndex = std::rand() % 64;//out of 64 pairs choose  a random one
-        if(originalBits[bit]] == '0' {      //if the original bit sequence is a 0, keep
-           secondEncryption[ 2 * bit] = flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
-           secondEncryption[ 2 * bit] = flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the colomn  select 
-
-
+        
+        std::string secondEncryption = "";
+        
+        for (int bit = 0; bit < 152; bit++){ //use the int bit to hold the bit posiio in the original sequence
+            int randomIndex = std::rand() % 128;//out of 128 pairs choose  a random one
+            if(originalBits[bit] == '0') {      //if the original bit sequence is a 0, keep
+                secondEncryption += flipBitAlpha[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
+                secondEncryption += flipBitBeta[randomIndex]; //use the randindex to get val 1-128 which dictates the row  select
+                
+                
             }
-    else {
+            else {
             }
-           secondEncryption[ 2 * bit] = flipBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
-           secondEncryption[ 2 * bit] = flipAlpha[randomIndex]; //alpha goes seco
-}
-
-    
-    std::cout << "Second Encryption Mod 64" << std::endl;
-        std::bitset<8> byte(std::string(secondEncryption, 8);
-        std::cout << byte.to_ulong();
+            secondEncryption += flipBitBeta[randomIndex]; // if the bit is '1', flip the pairs so beta goes first
+            secondEncryption += flipBitAlpha[randomIndex]; // alpha goes second
+        }
+        
+        
+        std::cout << "Second Encryption Mod 64" << std::endl;
+        for (int i= 0; i < 304; i+= 8){
+            std::string eight_byte_to_strings = secondEncryption.substr(i, 8);
+            std::bitset<8> byte(eight_byte_to_strings);
+            std::cout << byte.to_ulong();
             std::cout << ".";
         }
-
-
+        return 0;
+        
+    }
 
