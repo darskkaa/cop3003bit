@@ -37,7 +37,7 @@ int main () {
     //starts the first encrption process using mod 128, loop through original bits
     //encrypts using a random flip pair from mod 128.
     for (int bit = 0; bit < 152; bit++) {
-        int randomIndex = std::rand() % 128;// choose a random number, index, from 0-127
+        int randomIndex = std::rand() % 128;// choose a random row from flip file, assign it to index, from 0-127
 
         if(originalBits[bit] == '0')  {
             
@@ -47,7 +47,7 @@ int main () {
                 
         }
         else {
-            // if the original bit was not 0 its 1, append beta then alpha, aka flipping
+            // if the original bit was not 0 its 1, append beta then alpha, aka flipping the random pair
             firstEncryption += flipBitBeta[randomIndex];
             firstEncryption += flipBitAlpha[randomIndex];
             
@@ -81,8 +81,7 @@ int main () {
     //starts the second encryption process using mod 64, loop through original bits
     //encrypts using a random flip pair from mod 64.
     for (int bit = 0; bit < 152; bit++) {
-        int randomIndex = std::rand() % 64;// choose a random number, index, from 0-63
-
+        int randomIndex = std::rand() % 64; //choose a random row from flip file, assign it to index, from 0-63
         if(originalBits[bit] == '0')  {
             
            // if the bit is 0, then append alpha then beta from the random selected pair
@@ -91,7 +90,7 @@ int main () {
                 
         }
         else {
-            // if the original bit was not 0 its 1, append beta then alpha, aka flipping
+            // if the original bit was not 0 its 1, append beta then alpha, aka flipping the random pair
             secondEncryption += flipBitBeta[randomIndex];
             secondEncryption += flipBitAlpha[randomIndex];
                 
