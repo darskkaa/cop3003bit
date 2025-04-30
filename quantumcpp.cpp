@@ -9,7 +9,6 @@ int main () {
         
     }
     
-
     for(int i = 0; i < 152; i++){
         binSeqfile >> originalBits[i];  //read the 152 chars, 0 or 1 into the originalBits array
         
@@ -27,8 +26,6 @@ int main () {
     }
     
   
-
-
 
     for(int i = 0; i < 128; i++)  {  //read the 128 alpha beta pairs from the flip file
         flipFile >> flipBitAlpha[i] >> comma >> flipBitBeta[i]; //read the pairs
@@ -53,7 +50,6 @@ int main () {
             // if the original bit was not 0 its 1, append beta then alpha, aka flipping
             firstEncryption += flipBitBeta[randomIndex];
             firstEncryption += flipBitAlpha[randomIndex];
-            
             
         }
         
@@ -98,11 +94,9 @@ int main () {
             // if the original bit was not 0 its 1, append beta then alpha, aka flipping
             secondEncryption += flipBitBeta[randomIndex];
             secondEncryption += flipBitAlpha[randomIndex];
-            
-            
+                
         }
-        
-        
+            
     }
     
     //convert 304 bit encrypted string into decimal values, using 8 bit sections
@@ -120,7 +114,6 @@ int main () {
         
         std::cout << "."; //print a decimal to seperate each decimal number
     } std::cout << std::endl;
-    
     
     std::cout << std::endl;
     
