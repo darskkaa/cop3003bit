@@ -1,6 +1,7 @@
 #include "ADIL_QUANTUM.h"
 
 int main () {
+        srand(time(0)); // initialize the random number generator
     char originalBits [152]; // array to hold the files orignal binary sequence
     std::ifstream binSeqfile("binSeq.txt"); // open binary sequence file
     if(!binSeqfile){  //check if the file was opened succesfully
