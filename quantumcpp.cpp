@@ -36,7 +36,7 @@ int main () {
     }
     flipFile.close (); 
     
-    std::string firstEncryption = "";  //a  304 bit string that stores the encrypted output
+    std::string firstEncryption = "";  //  holds the 304 bit string
 
     //starts the first encrption process using mod 128, loop through original bits
     //encrypts using a random flip pair from mod 128.
@@ -81,7 +81,7 @@ int main () {
     std::cout << std::endl;
 
     
-    std::string secondEncryption = "";  //a  304 bit string that stores the encrypted output
+    std::string secondEncryption = "";  // holds the 304 bit string
 
     //starts the second encryption process using mod 64, loop through original bits
     //encrypts using a random flip pair from mod 64.
