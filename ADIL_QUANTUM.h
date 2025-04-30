@@ -6,5 +6,7 @@
 #include <iostream>
 #include <string>      //  string handling
 #include <cstdlib>     // for rand
+#include <ctime>   // required for time in srand
+
 
 #endif /* ADIL_QUANTUM_H */
