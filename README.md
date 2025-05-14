@@ -1,58 +1,90 @@
 Quantum Flip-Bit Encryption Simulator
-Overview
-This project simulates a quantum-inspired encryption technique using binary transformation and randomized bit-flipping logic. It's designed as part of the COP3003 coursework and mimics the behavior of quantum bit operations through classical means.
 
-The core concept revolves around encoding messages as binary, applying randomized alpha-beta flip-bit operations, and using pseudorandom selection logic to simulate quantum unpredictability.
+A quantum-inspired encryption tool built in C++ using randomized alpha-beta bit-flip logic.
 
-How It Works
-Message Encoding:
+---
 
-A plaintext message (e.g., "this is an encrypted message") is converted into binary (0s and 1s), with each character mapped accordingly.
+Project Summary
 
-The result is stored in a binary file representing the encrypted content.
+This project is a simulation of quantum-style encryption. Inspired by the unpredictability of quantum computation, the program encrypts text by transforming it into binary and applying random bit-flip operations drawn from a predefined set of *alpha-beta* pairs.
 
-Flip-Bit Pair File:
 
-A separate file contains 128 lines of "alpha-beta" pairs.
+## 🔍 How It Works
 
-Each line has a sequence of flip instructions, such as 0, 1, 1, 0, ..., which determine how bits will be flipped during transformation.
+### 1. **Message Encoding**
 
-Quantum-like Algorithm:
+* A plaintext message (e.g. `"this is an encrypted message"`) is read from a file.
+* Each character is mapped into binary (`0` and `1`) and saved in a binary file.
 
-A pseudorandom number generator (seeded with srand) is used to simulate quantum randomness.
+### 2. **Alpha-Beta Flip Pairs**
 
-The modulo operator selects a random line (0–127) from the flip-bit file for each byte or bit group in the binary message.
+* A second file contains 128 lines of *alpha-beta* pairs (e.g. `0 1 1 0 1 0 ...`).
+* Each line represents a specific pattern of bit flips.
 
-Encryption Process:
+### 3. **Quantum-Like Transformation**
 
-The selected alpha-beta pair is applied to the message bits.
+* A pseudorandom generator (`srand`) is used to simulate quantum unpredictability.
+* A line is selected from the flip-bit file using:
 
-This transforms the bits according to predefined flip logic, yielding an encrypted output.
+  ```
+  index = rand() % 128
+  ```
+* The selected flip pattern is applied to the message's binary bits to simulate a "quantum operation."
 
-File Structure
-main.cpp — Main program logic for file I/O, binary conversion, and quantum simulation.
+---
 
-flip_pairs.txt — Contains the 128 flip-bit alpha-beta pairs.
+## 📁 File Structure
 
-message.txt — Input message to be encrypted.
+```bash
+📦 cop3003bit
+├── flip_pairs.txt         # 128 alpha-beta flip-bit lines
+├── message.txt            # Plaintext message to encrypt
+├── binary_output.bin      # Binary version of the input message
+├── encrypted_output.bin   # Encrypted message using flip-bit logic
+└── main.cpp               # Main encryption algorithm
+```
 
-binary_output.bin — Binary-encoded message.
+---
 
-encrypted_output.bin — Encrypted binary after applying flip-bit transformation.
+## ⚙️ Getting Started
 
-Compilation
-Make sure you have a C++ compiler installed (supporting at least C++11):
+* C++11 or later
+* g++ or any C++ compiler
 
-bash
-Copy
-Edit
+### 🛠️ Compile the Program
+
+```bash
 g++ -std=c++11 main.cpp -o quantum_encryptor
-Running the Program
-Once compiled, run the program:
+```
 
-bash
-Copy
-Edit
+// Run the Program
+
+```bash
 ./quantum_encryptor
-Make sure your message.txt and flip_pairs.txt are correctly formatted and located in the working directory.
+```
+
+Ensure the following files are present in the same directory:
+
+* `message.txt`
+* `flip_pairs.txt`
+
+---
+**Process**:
+
+1. Convert `"hello"` to binary.
+2. Randomly pick a line from `flip_pairs.txt`.
+3. Flip bits using the selected alpha-beta line.
+4. Save result to `encrypted_output.bin`.
+
+---
+
+##  Key Concepts
+
+| Concept          | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `alpha-beta`     | Pairs defining flip rules for each binary position |
+| `rand()`         | Simulates the "quantum" randomness                 |
+| `srand(time(0))` | Seeds RNG for pseudo-randomness                    |
+| `% 128`          | Selects one of 128 flip-bit rules                  |
+
 
